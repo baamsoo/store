@@ -1,0 +1,26 @@
+{{>layouts/header}}
+
+<table class="table">
+    <thread>
+        <tr>
+            <th scope="col">name</th>
+            <th scope="col">location</th>
+            <th scope="col">phone</th>
+            <th scope="col">type</th>
+            <th scope="col">site</th>
+        </tr>
+    </thread>
+    <tbody>
+        {{#storeList}}
+        <tr>
+            <th><a href = "/stores/detail/{{name}}">{{name}}</th>
+            <th>{{location}}</th>
+            <th>{{phone}}</th>
+            <th>{{type}}</th>
+            <th>{{site}}</th>
+        </tr>
+        {{/storeList}}
+    </tbody>
+</table>
+
+{{>layouts/footer}}

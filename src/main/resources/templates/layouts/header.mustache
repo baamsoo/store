@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>가게 찾기</title>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e1hz5qky28"></script>
+</head>
+<body>
+<!-- navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/stores">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        지도
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/stores/map/미쉐린">미쉐린 가이드</a></li>
+                        <li><a class="dropdown-item" href="/stores/map/블루리본">블루리본 서베이</a></li>
+                        <li><a class="dropdown-item" href="/stores/map/전체">전체</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                {{#isAdminValueZero}}
+                <button><a href="/members">회원관리</a></button>
+                {{/isAdminValueZero}}
+                <button><a href="/logout">로그아웃</a></button>
+                <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" onclick="performSearch()">Search</button>
+            </form>
+            <script>
+                function performSearch() {
+                    const searchTerm = document.getElementById('searchInput').value;
+                    
+                    const newURL = '/stores/' + searchTerm;
+                
+                    history.pushState({ path: newURL }, '', newURL);
+                
+                    updateSearchResults(searchTerm);
+                }
+            </script>
+        </div>
+        
+    </div>
+</nav>
+
+{{#msg}}
+<div class="alert alert-primary alert-dismissible">
+    {{msg}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"
+            aria-label="Close"></button>
+</div>
+{{/msg}}
